@@ -39,9 +39,11 @@ def get_response(guess_list, randomly_selected_word):
 
 
      
-def play_the_game(words):
+def play_the_game(words, cheat=False):
     random_word_index = int(random.random()*len(words))
     randomly_selected_word = words[random_word_index]
+    if cheat:
+        print(randomly_selected_word)
     guess_list = []
     lives = 7
     first_response = get_response(guess_list, randomly_selected_word)
@@ -65,9 +67,15 @@ def play_the_game(words):
         
 if __name__ == "__main__":
 
+    import os
+    base_path = os.path.abspath(os.path.dirname(__file__))
+    path_to_input_file = os.path.join(base_path, "word_list.txt")
 
-    word_file = open("word_list.txt", "r")
-    word_contents = word_file.readlines()
+              
+
+    with open(path_to_input_file, "r") as file:
+                    word_contents = file.readlines()
+    
     word_list = []
 
     for word in word_contents:
@@ -76,6 +84,8 @@ if __name__ == "__main__":
         word_list.append(new_word)
 
 
-    # words =["cat", "chicken", "apple", "clock"]
+    
+
+    
     play_the_game(word_list)
     
